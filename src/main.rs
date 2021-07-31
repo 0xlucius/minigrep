@@ -2,9 +2,9 @@
 // most code will be overly commented as I am noting things to myself
 
 use std::env;
-use std::error::Error;
-use std::fs;
 use std::process;
+
+use minigrep::Config;
 
 fn main() {
     // recieve an iteration of the provided command line arguments
@@ -25,37 +25,9 @@ fn main() {
     // does not use unwrap_or_else because run() does not
     // return any value to unwrap on success
     // so we only check if the result is Err
-    if let Err(e) = run(config) {
+    if let Err(e) = minigrep::run(config) {
         println!("Application error: {}", e);
 
         process::exit(1);
     }
-}
-
-struct Config {
-    query: String,
-    filename: String,
-}
-
-impl Config {
-    fn new(args: &[String]) -> Result<Config, &str> {
-        if args.len() < 3 {
-            return Err("not enough arguments");
-        }
-
-        // This part could be made more efficent using a different method
-        // I will change later when I learn how
-        let query = args[1].clone();
-        let filename = args[2].clone();
-
-        Ok(Config { query, filename })
-    }
-}
-
-fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string(config.filename)?;
-
-    println!("With Text:\n{}", contents);
-
-    Ok(())
 }
