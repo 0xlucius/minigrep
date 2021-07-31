@@ -1,4 +1,5 @@
 use std::env;
+use std::fs;
 
 fn main() {
     // recieve an iteration of the provided command line arguments
@@ -10,4 +11,8 @@ fn main() {
 
     println!("Searching for {}", query);
     println!("In file {}", filename);
+
+    let contents = fs::read_to_string(filename).expect("Unable to read file1");
+
+    println!("With Text:\n{}", contents);
 }
