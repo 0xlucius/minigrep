@@ -15,9 +15,7 @@ fn main() {
     println!("Searching for {}", config.query);
     println!("In file {}", config.filename);
 
-    let contents = fs::read_to_string(config.filename).expect("Unable to read file1");
-
-    println!("With Text:\n{}", contents);
+    run(config);
 }
 
 struct Config {
@@ -35,4 +33,10 @@ impl Config {
 
         Ok(Config { query, filename })
     }
+}
+
+fn run(config: Config) {
+    let contents = fs::read_to_string(config.filename).expect("Unable to read file");
+
+    println!("With Text:\n{}", contents);
 }
