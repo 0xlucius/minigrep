@@ -19,9 +19,6 @@ fn main() {
         process::exit(1);
     });
 
-    println!("Searching for {}", config.query);
-    println!("In file {}", config.filename);
-
     // does not use unwrap_or_else because run() does not
     // return any value to unwrap on success
     // so we only check if the result is Err
