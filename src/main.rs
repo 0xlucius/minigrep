@@ -15,7 +15,7 @@ fn main() {
     // value inside, or upon fail, it will run the closure
     // anon function we passed into it.
     let config = Config::new(&args).unwrap_or_else(|err| {
-        println!("Problem parsing arguments: {}", err);
+        eprintln!("Problem parsing arguments: {}", err);
         process::exit(1);
     });
 
@@ -23,7 +23,7 @@ fn main() {
     // return any value to unwrap on success
     // so we only check if the result is Err
     if let Err(e) = minigrep::run(config) {
-        println!("Application error: {}", e);
+        eprintln!("Application error: {}", e);
 
         process::exit(1);
     }
